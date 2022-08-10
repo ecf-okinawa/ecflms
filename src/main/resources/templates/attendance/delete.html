@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{admin/layout :: layout(~{::title},~{::body/content()})}">
+<head>
+    <title>受講情報削除</title>
+</head>
+<body>
+    <h2>受講情報削除</h2>
+    下記の受講情報を削除します。
+    <div th:object="${attendance}">
+	    <table>
+	        <tr>
+	            <th>受講者ID</th>
+	            <td th:text="*{userId}"></td>
+	        </tr>
+	        <tr>
+	            <th>得点</th>
+	            <td th:text="*{score}"></td>
+	        </tr>
+	        <tr>
+	            <th>ランク</th>
+	            <td th:text="*{rank}"></td>
+	        </tr>
+	    </table>
+		<form th:action="@{/attendance/dodelete/{id}/{courseId}(id=${attendance.id},courseId=${attendance.courseId})}" >
+			<div class="action">
+		        <input type="submit" value="削除" />
+		        <input type="submit" value="戻る" th:formaction="@{/attendance/view/{courseId}(courseId=${attendance.courseId})}" formmethod="get" />
+		    </div>
+		</form>
+    </div>
+</body>
+</html>

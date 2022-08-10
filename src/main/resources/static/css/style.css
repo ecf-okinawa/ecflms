@@ -1,0 +1,168 @@
+body{
+	margin:0;
+}
+/*アプリケーション全体*/
+div.app{
+	height:100vh;
+	/*width:100vw;*/
+	width:100%;
+	display:flex;
+	flex-direction: column;
+}
+
+div.login{
+	margin:auto;
+	width:350px;
+}
+
+div.login h1{
+	text-align: center;
+	color: royalblue;
+}
+
+div.login form{
+	width:250px;
+	margin:auto;
+}
+
+main{
+	display: flex;
+	flex-direction: row;
+	flex-grow:1;
+}
+
+/* ヘッダー */
+header{
+	background: deepskyblue;
+	color:white;
+	padding:8px;
+	display: flex;
+	justify-content: space-between;
+}
+
+header.admin{
+	background:black;
+}
+
+header a{
+	text-decoration: none;
+	color: white;
+}
+header a:visited{
+	color: white;
+}
+
+/* サイドメニュー */
+div.menu{
+	width:200px;
+	background:lightgray;
+}
+div.menu ul{
+	list-style:none;
+}
+div.menu li a{
+	text-decoration: none;
+}
+
+/* メインコンテンツ */
+div.content{
+	display:block;
+	flex-grow:1;
+	margin:8px;
+	margin-left:12px;
+}
+
+/* テーブル */
+table{
+    border-collapse: collapse;
+    margin-bottom: 8px;
+}
+table th, table td{
+    border: solid 1px black;
+    padding: 4px;
+}
+
+/* フォーム */
+form{
+    margin-bottom: 8px;
+    display:flex;
+	flex-direction: column;
+}
+/* フォーム(各項目) */
+form div.item{
+	display:flex;
+	flex-direction: row;
+	width:400px;
+	margin-bottom:8px;
+}
+form div.item label{
+	width:10em;
+}
+form div.item input,select,textarea{
+	flex:1 1 auto;
+}
+
+/* フォーム(アクションボタン) */
+form div.action{
+	display:flex;
+	flex-direction: row;
+	width:200px;
+	margin-bottom:8px;
+}
+form div.action input{
+	width:50%;
+	margin:4px;
+}
+
+/* バリデーションエラー */
+.validation_error{
+	color: red;
+}
+
+div.contents_header{
+    text-align: right;
+}
+
+/* メッセージ */
+.message{
+	color: green;
+	background: honeydew;
+	padding:4px;
+}
+.info{
+	color: green;
+	background: honeydew;
+	padding:4px;
+}
+.warn{
+	color: red;
+	background: mistyrose;
+	padding:4px;
+}
+
+/* コース表示カード */
+.cardBox{
+	display:flex;
+	flex-direction: column;
+	width:700px;
+	margin:auto;
+	margin-top:12px;
+}
+
+.courseCard{
+	display:flex;
+	flex-direction:column;
+	border:solid 1px black;
+	margin-bottom:12px;
+	padding:4px;
+	padding-left:12px;
+}
+
+.courseCard p,h4{
+	margin-bottom:4px;
+}
+
+.courseCard input{
+	margin-top:8px;
+	width:100px;
+}

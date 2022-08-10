@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+}
+
+group = 'com.e3factory'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	//MyBatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
+	//postgresql
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.e3factory.repository.AttendanceRepository">
+	<select id="getAttendanceCount" resultType="int">
+		SELECT
+			count(*) as attendanceCount
+		FROM attendances WHERE course_id = #{courseId}
+	</select>
+	<select id="findById" resultType="com.e3factory.dto.Attendance">
+		SELECT
+			id,
+			user_id as "userId",
+			course_id as "courseId",
+			score,
+			rank
+		FROM attendances WHERE id = #{id}
+	</select>
+	<select id="findByCourseId" resultType="com.e3factory.dto.Attendance">
+		SELECT
+			id,
+			user_id as "userId",
+			course_id as "courseId",
+			score,
+			rank
+		FROM attendances WHERE course_id = #{courseId}
+	</select>
+	<select id="findByUserId" resultType="com.e3factory.dto.Attendance">
+		SELECT
+			id,
+			user_id as "userId",
+			course_id as "courseId",
+			score,
+			rank
+		FROM attendances WHERE user_id = #{userId}
+	</select>
+	<insert id="insert">
+		INSERT INTO attendances(id,user_id,course_id)
+		SELECT MAX(id)+1,#{userId},#{courseId} FROM attendances;
+	</insert>
+	<delete id="delete">
+		DELETE FROM attendances WHERE id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{admin/layout :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>講座更新</title>
+</head>
+<body>
+	<h2>講座更新</h2>
+	<form th:action="@{/course/doupdate}" th:object="${courseForm}"
+		method="post">
+		<p th:errors="*{all}" class="validation_error"></p>
+		<div class="item">
+			<label>講座ID：</label>
+			<input type="text" th:field="*{id}" readonly="readonly" />
+		</div>
+		<div class="item">
+			<label>講座名：</label>
+			<input type="text" th:field="*{name}" />
+		</div>
+		<div class="item">
+			<label>講師ID：</label>
+			<input type="text" th:field="*{userId}" />
+		</div>
+		<div class="item">
+			<label>開始日：</label>
+			<input type="text" th:field="*{startDate}" />
+		</div>
+		<div class="item">
+			<label>終了日：</label>
+			<input type="text" th:field="*{endDate}" />
+		</div>
+		<div class="item">
+			<label>定員：</label>
+			<input type="text" th:field="*{capacity}" />
+		</div>
+		<div class="item">
+			<label>場所：</label>
+			<input type="text" th:field="*{location}" />
+		</div>
+		<div class="action">
+			<input type="submit" value="更新" />
+		    <input type="submit" value="戻る" formaction="/course/view" formmethod="get" />
+		</div>
+	</form>
+</body>
+</html>

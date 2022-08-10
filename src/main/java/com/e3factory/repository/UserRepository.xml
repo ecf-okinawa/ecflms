@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.e3factory.repository.UserRepository">
+	<select id="findById" resultType="com.e3factory.dto.User">
+		SELECT * FROM users WHERE id = #{id}
+	</select>
+	<select id="findAll" resultType="com.e3factory.dto.User">
+		SELECT * FROM users
+	</select>
+	<insert id="insert">
+		INSERT INTO users(id,password,privilege,name)
+		VALUES(#{id},#{password},#{privilege},#{name})
+	</insert>
+	<update id="update">
+		UPDATE users
+		SET password = #{password},privilege = #{privilege},name = #{name}
+		WHERE id = #{id}
+	</update>
+	<delete id="delete">
+		DELETE FROM users WHERE id = #{id}
+	</delete>
+</mapper>

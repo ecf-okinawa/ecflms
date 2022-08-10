@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{admin/layout :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>ユーザー一覧</title>
+</head>
+<body>
+	<h2>ユーザー一覧</h2>
+	<p th:if="*{message} != null" th:text="${message}" class="message" ></p>
+	<form th:action="@{/user/insert}" method="post">
+		<div class="action">
+			<input type="submit" value="新規登録" />
+		</div>
+	</form>
+	<table>
+		<tr>
+			<th>ユーザーID</th>
+			<th>権限</th>
+			<th>名前</th>
+			<th>更新</th>
+			<th>削除</th>
+		</tr>
+		<tr th:each="user : ${userList}">
+			<td th:text="${user.id}"></td>
+			<td th:text="${user.privilege}"></td>
+			<td th:text="${user.name}"></td>
+			<td><a th:href="@{/user/update/{id}(id=${user.id})}">更新</a></td>
+			<td><a th:href="@{/user/delete/{id}(id=${user.id})}">削除</a></td>
+		</tr>
+	</table>
+</body>
+</html>
