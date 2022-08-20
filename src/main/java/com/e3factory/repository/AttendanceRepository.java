@@ -11,8 +11,10 @@ import com.e3factory.dto.Attendance;
 public interface AttendanceRepository {
 	public Attendance findById(int id);
 	public List<Attendance> findByCourseId(int courseId);
+	public List<Attendance> findDetailByCourseId(int courseId);
 	public List<Attendance> findByUserId(String userId);
 	public void delete(int id);
 	public int getAttendanceCount(int courseId);
 	public void insert(@Param("courseId") int courseId, @Param("userId") String userId);
+	public void updateEvaluate(Attendance attendance);
 }

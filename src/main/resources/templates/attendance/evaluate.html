@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{admin/layout :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>成績評価</title>
+</head>
+<body>
+	<h2>成績評価</h2>
+	<form th:action="@{/attendance/evaluate/doupdate}" th:object="${attendanceForm}" method="post">
+		<p th:errors="*{all}" class="validation_error"></p>
+		<input type="hidden" name="courseId" th:value="*{courseId}" />
+		<div class="item">
+			<label>講座名：</label>
+			<input type="text" th:field="*{courseName}" readonly="readonly" />
+		</div>
+		<div class="item">
+			<label>受講者名：</label>
+			<input type="text" th:field="*{userName}" readonly="readonly" />
+		</div>
+		<div class="item">
+			<label>得点：</label>
+			<input type="text" th:field="*{score}" style="flex:initial;width:50px;" />
+		</div>
+		<div class="item">
+			<label>評価：</label>
+			<select th:field="*{rank}" style="flex:initial;width:50px;">
+				<option value="S">S</option>
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+			</select>
+		</div>
+		<div class="action">
+			<input type="submit" value="更新" />
+		    <input type="submit" value="戻る" th:formaction="@{/attendance/view/{id}(id=*{courseId})}" th:formmethod="get" />
+		</div>
+	</form>
+</body>
+</html>

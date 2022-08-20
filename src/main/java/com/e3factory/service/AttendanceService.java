@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.e3factory.dto.Attendance;
 import com.e3factory.dto.Course;
+import com.e3factory.dto.User;
+import com.e3factory.form.AttendanceForm;
 import com.e3factory.repository.AttendanceRepository;
 import com.e3factory.repository.CourseRepository;
+import com.e3factory.repository.UserRepository;
 import com.e3factory.util.AppMessage;
 
 @Service
@@ -21,10 +24,26 @@ public class AttendanceService {
 	@Autowired
 	private CourseRepository courseRepository;
 	@Autowired
+	private UserRepository UserRepository;
+	@Autowired
 	private MessageSource messageSource;
 
-	public List<Attendance> findByCourseId(String courseId){
-		return attendanceRepository.findByCourseId(Integer.parseInt(courseId));
+	public List<AttendanceForm> findByCourseId(String courseId){
+		List<Attendance> attendList = attendanceRepository.findDetailByCourseId(Integer.parseInt(courseId));
+		//フォームへ移動
+		ArrayList<AttendanceForm> formList = new ArrayList<AttendanceForm>();
+		for( Attendance attendance : attendList ) {
+			AttendanceForm form = new AttendanceForm();
+			form.setId(attendance.getId());
+			form.setCourseId(attendance.getCourseId());
+			form.setCourseName(attendance.getCourseName());
+			form.setUserId(attendance.getUserId());
+			form.setUserName(attendance.getUserName());
+			form.setScore(attendance.getScore());
+			form.setRank(attendance.getRank());
+			formList.add(form);
+		}
+		return formList;
 	}
 
 	public Attendance findById(String id) {
@@ -56,5 +75,37 @@ public class AttendanceService {
 	@Transactional
 	public void delete(int id) {
 		attendanceRepository.delete(id);
+	}
+
+	/**
+	 * 評価画面表示用フォームを返す
+	 * @param id
+	 * @return
+	 */
+	public AttendanceForm viewEvaluate(int id) {
+		Attendance attendance = attendanceRepository.findById(id);
+		User student = UserRepository.findById(attendance.getUserId());
+
+		//フォームへコピー
+		AttendanceForm form = new AttendanceForm();
+		form.setId(id);
+		form.setCourseId(attendance.getCourseId());
+		form.setCourseName(attendance.getCourseName());
+		form.setUserId(attendance.getUserId());
+		form.setUserName(student.getName());
+		form.setScore(attendance.getScore());
+		form.setRank(attendance.getRank());
+
+		return form;
+	}
+
+	public void updateEvaluate(AttendanceForm form) {
+		//formからdtoへコピー
+		Attendance attendance = new Attendance();
+		attendance.setId(form.getId());
+		attendance.setScore(form.getScore());
+		attendance.setRank(form.getRank());
+		//更新処理
+		attendanceRepository.updateEvaluate(attendance);
 	}
 }

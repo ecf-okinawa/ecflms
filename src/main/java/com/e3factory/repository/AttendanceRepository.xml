@@ -9,14 +9,33 @@
 			count(*) as attendanceCount
 		FROM attendances WHERE course_id = #{courseId}
 	</select>
-	<select id="findById" resultType="com.e3factory.dto.Attendance">
+	<select id="findById" resultMap="findDetailMap">
 		SELECT
-			id,
-			user_id as "userId",
+			a.id as "id",
+			a.user_id as "userId",
+			u.name as "userName",
 			course_id as "courseId",
+			c.name as "courseName",
 			score,
 			rank
-		FROM attendances WHERE id = #{id}
+		FROM attendances a
+			JOIN users u on a.user_id = u.id
+			JOIN courses c on a.course_id = c.id
+		WHERE a.id = #{id}
+	</select>
+	<select id="findDetailByCourseId" resultMap="findDetailMap">
+		SELECT
+			a.id as "id",
+			a.user_id as "userId",
+			u.name as "userName",
+			course_id as "courseId",
+			c.name as "courseName",
+			score,
+			rank
+		FROM attendances a
+			JOIN users u on a.user_id = u.id
+			JOIN courses c on a.course_id = c.id
+		WHERE a.course_id = #{id}
 	</select>
 	<select id="findByCourseId" resultType="com.e3factory.dto.Attendance">
 		SELECT
@@ -40,7 +59,21 @@
 		INSERT INTO attendances(id,user_id,course_id)
 		SELECT MAX(id)+1,#{userId},#{courseId} FROM attendances;
 	</insert>
+	<update id="updateEvaluate">
+		UPDATE attendances
+		SET score = #{score},rank = #{rank}
+		WHERE id = #{id}
+	</update>
 	<delete id="delete">
 		DELETE FROM attendances WHERE id = #{id}
 	</delete>
+
+	<resultMap id="findDetailMap" type="com.e3factory.dto.Attendance">
+		<id property="id" column="id" />
+		<result property="userId" column="userId" />
+		<result property="userName" column="userName" />
+		<result property="courseId" column="courseId" />
+		<result property="score" column="score" />
+		<result property="rank" column="rank" />
+	</resultMap>
 </mapper>

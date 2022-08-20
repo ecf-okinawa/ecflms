@@ -102,6 +102,11 @@ form div.item input,select,textarea{
 	flex:1 1 auto;
 }
 
+/* フォーム(読み取り専用項目) */
+input[readonly]{
+	background-color:gainsboro;
+}
+
 /* フォーム(アクションボタン) */
 form div.action{
 	display:flex;

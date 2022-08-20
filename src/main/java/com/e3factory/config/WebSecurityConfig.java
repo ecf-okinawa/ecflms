@@ -19,7 +19,7 @@ public class WebSecurityConfig{
 		//全権限で許可
 		.antMatchers("/common/**","/css/**","/").permitAll()
 		//TEACHER権限のアクセス
-		.antMatchers("/course/**","/attendance/view/**").hasAnyRole("ADMIN","TEACHER")
+		.antMatchers("/course/**","/attendance/view/**","/attendance/evaluate/**").hasAnyRole("ADMIN","TEACHER")
 		//ADMIN権限のユーザーのみが管理者画面(/**)にアクセスできる
 		.antMatchers("/**").hasRole("ADMIN")
 		//その他の閲覧はダメ

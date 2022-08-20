@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	th:replace="~{admin/layout :: layout(~{::title},~{::body/content()})}">
 <head>
 <title>受講情報一覧</title>
@@ -21,16 +22,20 @@
 	<h3>受講状況</h3>
 	<table>
 		<tr>
-			<th>受講者ID</th>
+			<th>受講者名</th>
 			<th>得点</th>
 			<th>ランク</th>
 			<th>操作</th>
+			<th sec:authorize="hasRole('TEACHER')">評価</th>
 		</tr>
 		<tr th:each="attendance : ${attendanceList}">
-			<td th:text="${attendance.userId}"></td>
+			<td th:text="${attendance.userName}"></td>
 			<td th:text="${attendance.score}"></td>
 			<td th:text="${attendance.rank}"></td>
 			<td><a th:href="@{/attendance/delete/{id}(id=${attendance.id})}">削除</a></td>
+			<td sec:authorize="hasRole('TEACHER')">
+				<a th:href="@{/attendance/evaluate/update/{id}(id=${attendance.id})}">評価</a>
+			</td>
 		</tr>
 	</table>
 	<form th:action="@{/course/view}" method="get">
