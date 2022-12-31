@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{manager/layout :: layout(~{::head/content()},~{::body/content()})}">
+<head>
+	<title>講義編集</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/m/course.css}" />
+</head>
+<body>
+	<!-- メッセージ表示 -->
+	<p th:if="*{message} != null" th:text="${message}" class="message" ></p>
+	<p th:if="*{all} != null" th:errors="*{all}" class="validation_error" ></p>
+	<!-- 更新フォーム -->
+	<form th:action="@{/m/lesson/doupdate}" method="POST">
+		<input type="hidden" th:value="${lesson.id}" name="id" />
+		<label>講座名：</label>
+		<input type="text" th:value="${lesson.title}" name="title" />
+		<label>内容：</label>
+		<textarea cols="100" rows="30" name="content" >[[${lesson.content}]]</textarea>
+		<div class="action">
+			<input type="submit" value="更新">
+			<input type="submit" th:formaction="@{/m/lesson/preview/{id}(id=${lesson.id})}" th:formtarget="_blank"  value="プレビュー" />
+		</div>
+	</form>
+	<script th:src="@{/js/m/lesson/update.js}"></script>
+</body>
+</html>

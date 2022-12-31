@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.e3factory.common.repository.CourseStructureRepository">
+	<select id="findCourseStructureByCourseId" resultMap="courseContentsAll">
+		SELECT
+		  cs.course_id as courseId
+		  ,cs.section_id as sectionId
+		  ,cs.lesson_id as lessonId
+		  ,cs.order_no as orderNo
+		  ,c.name as courseName
+		  ,s.name as sectionName
+		  ,l.title as lessonTitle
+		FROM course_structure cs
+		JOIN courses c
+		  ON cs.course_id = c.id
+		JOIN sections s
+		  ON cs.section_id = s.id
+		JOIN lessons l
+		  ON cs.lesson_id = l.id
+		WHERE
+		  cs.course_id = #{courseId}
+		ORDER BY
+		  cs.order_no
+	</select>
+	<insert id="bulkInsertCourse">
+		INSERT INTO course_structure(
+			course_id
+			,section_id
+			,lesson_id
+			,order_no
+		)
+		VALUES
+		<foreach collection="list" item="content" separator=",">
+		(
+			#{content.courseId}
+			,#{content.sectionId}
+			,#{content.lessonId}
+			,#{content.orderNo}
+		)
+		</foreach>
+	</insert>
+	<delete id="deleteCourseById">
+		DELETE FROM course_structure WHERE course_id = #{id}
+	</delete>
+
+	<resultMap id="courseContentsAll" type="com.e3factory.common.dto.CourseContent" >
+		<id property="id"  column="courseId" />
+		<result property="name"  column="courseName" />
+		<collection property="sections" ofType="com.e3factory.common.dto.Section">
+			<id property="id"  column="sectionId" />
+			<result property="name"  column="sectionName" />
+			<collection property="lessons" ofType="com.e3factory.common.dto.Lesson">
+				<id property="id"  column="lessonId" />
+				<result property="title"  column="lessonTitle" />
+				<result property="order"  column="orderNo" />
+			</collection>
+		</collection>
+	</resultMap>
+</mapper>

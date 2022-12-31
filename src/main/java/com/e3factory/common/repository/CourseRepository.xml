@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.e3factory.common.repository.CourseRepository">
+	<select id="findById" resultType="com.e3factory.common.dto.Course">
+		SELECT
+			c.id as id,
+			c.name as name,
+			c.user_id as userId,
+			c.img_path as imgPath,
+			u.name as teacherName
+		FROM courses c
+			LEFT JOIN users u ON c.user_id = u.id
+		WHERE c.id = #{id}
+	</select>
+	<select id="findByUserId" resultType="com.e3factory.common.dto.Course">
+		SELECT
+			c.id as id,
+			c.name as name,
+			c.user_id as userId,
+			c.img_path as imgPath,
+			u.name as teacherName
+		FROM courses c
+			LEFT JOIN users u ON c.user_id = u.id
+		WHERE user_id = #{userId}
+	</select>
+	<select id="findAll" resultType="com.e3factory.common.dto.Course">
+		SELECT
+			c.id as id,
+			c.name as name,
+			c.user_id as userId,
+			c.img_path as imgPath,
+			u.name as teacherName
+		FROM courses c
+			LEFT JOIN users u ON c.user_id = u.id
+	</select>
+	<insert id="insert">
+		INSERT INTO courses(id,name,user_id,img_path)
+		SELECT MAX(id)+1,#{name},#{userId},#{imgPath} FROM courses;
+	</insert>
+	<update id="update">
+		UPDATE courses
+		SET name = #{name},user_id = #{userId}
+		WHERE id = #{id}
+	</update>
+	<delete id="delete">
+		DELETE FROM courses WHERE id = #{id}
+	</delete>
+</mapper>

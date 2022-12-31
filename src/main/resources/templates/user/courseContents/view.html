@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{user/layout :: layout(~{::head/content()},~{::body/content()})}">
+<head>
+	<title>講座内容一覧</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/u/course.css}" />
+</head>
+<body>
+	<h2>[[${courseContent.name}]]</h2>
+	<ul id="message-area" class="message-area">
+	</ul>
+	<div id="sections" th:data-courseid="${courseContent.id}">
+		<div th:each="section, statusS :${courseContent.sections}" class="section" th:data-sectionid="${section.id}">
+			<div class="section-header">
+				<div class="section-no">セクション[[${statusS.count}]]</div>
+				<div class="section-title">[[${section.name}]]</div>
+			</div>
+			<div th:id="'lessons'+${section.id}">
+				<div th:each="lesson:${section.lessons}" class="lesson" th:data-sectionid="${section.id}" th:data-lessonid="${lesson.id}">
+					<div class="lesson-no">レッスン[[${lesson.order}]]</div>
+					<div class="lesson-title">[[${lesson.title}]]</div>
+					<button th:onclick="'pushAttendance('+${courseContent.id}+','+${lesson.id}+')'">受講</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:src="@{/js/u/courseContents/view.js}"></script>
+</body>
+</html>

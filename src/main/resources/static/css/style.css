@@ -112,7 +112,7 @@ form div.action{
 	display:flex;
 	flex-direction: row;
 	width:200px;
-	margin-bottom:8px;
+	margin:8px 0px;
 }
 form div.action input{
 	width:50%;

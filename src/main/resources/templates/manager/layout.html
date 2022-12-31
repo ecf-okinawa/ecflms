@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:fragment="layout(head,body)">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+	<!-- 各固有画面のheadを読込 -->
+	<th:block th:replace="${head}"></th:block>
+</head>
+<body>
+<div class="app">
+	<header class="admin">
+		<div class="logo">
+			受講管理システム
+		</div>
+		<div class="logout">
+			<span sec:authentication="name"></span>(<a th:href="@{/logout}">ログアウト</a>)
+		</div>
+	</header>
+	<main>
+		<div class="menu">
+			<ul>
+				<li><a th:href="@{/m/user/view}" sec:authorize="hasRole('ADMIN')">ユーザー管理</a></li>
+				<li><a th:href="@{/m/course/view}">講座管理</a></li>
+			</ul>
+		</div>
+		<div class="content">
+			<th:block th:replace="${body}"></th:block>
+		</div>
+	</main>
+</div>
+</body>
+</html>

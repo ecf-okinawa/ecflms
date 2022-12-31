@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{manager/layout :: layout(~{::head/content()},~{::body/content()})}">
+<head>
+<title>講座一覧</title>
+</head>
+<body>
+	<h2>講座一覧</h2>
+	<p th:if="*{message} != null" th:text="${message}" class="message" ></p>
+	<form th:action="@{/m/course/insert}" method="post">
+		<div class="action">
+			<input type="submit" value="新規登録" />
+		</div>
+	</form>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>講座名</th>
+			<th>講師ID</th>
+			<th colspan="3">操作</th>
+		</tr>
+		<tr th:each="course : ${courseList}">
+			<td th:text="${course.id}"></td>
+			<td th:text="${course.name}"></td>
+			<td th:text="${course.userId}"></td>
+			<td><a th:href="@{/m/course/update/{id}(id=${course.id})}">更新</a></td>
+			<td><a th:href="@{/m/course/delete/{id}(id=${course.id})}">削除</a></td>
+			<td><a th:href="@{/m/course/content/update/{id}(id=${course.id})}">内容編集</a></td>
+		</tr>
+	</table>
+</body>
+</html>

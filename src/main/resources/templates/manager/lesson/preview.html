@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{manager/layout :: layout(~{::head/content()},~{::body/content()})}">
+<head>
+	<title>講義編集</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/m/course.css}" />
+</head>
+<body>
+	<h1>[[${lesson.title}]]</h1>
+	<div th:utext="${lesson.content}">
+	</div>
+</body>
+</html>

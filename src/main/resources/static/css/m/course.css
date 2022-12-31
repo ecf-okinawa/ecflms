@@ -1,0 +1,58 @@
+h2{
+	color:gray;
+}
+.section{
+	border:solid 1px gray;
+	margin:8px;
+	margin-bottom:16px;
+}
+.section-header{
+	background-color:gray;
+	color:white;
+	font-weight:bold;
+	margin:0;
+	padding:8px;
+	display:flex;
+}
+.section-no{
+	color:white;
+	font-weight:bold;
+	margin:4px;
+	margin-right:12px;
+}
+.section-title{
+	color:white;
+	font-weight:bold;
+	margin:4px;
+	margin-right:12px;
+}
+
+.addSection{
+	padding:8px;
+}
+
+.lesson{
+	border:solid 1px #000000;
+	padding:8px;
+	margin:16px;
+	display:flex;
+}
+.lesson-no{
+	color:#999999;
+	font-weight:bold;
+	margin:4px;
+	margin-right:12px;
+}
+.lesson-title{
+	color:gray;
+	font-weight:bold;
+	margin:4px;
+}
+.message-area{
+	display: none;
+	background-color: mistyrose;
+	color:red;
+}
+.message-area li{
+	list-style: none;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{user/layout :: layout(~{::title},~{::body/content()},~{::link})}">
+<head>
+	<title>講座内容一覧</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/course.css}" />
+</head>
+<body>
+	<h2>Java基礎コース</h2>
+	<div id="sections" >
+		<div th:each="section, statusS :${sections}" class="section" th:id="'section'+${section.id}">
+			<div class="section-header">
+				<div class="section-no">セクション[[${statusS.count}]]</div>
+				<div class="section-title">[[${section.name}]]</div>
+			</div>
+			<div id="lessons">
+				<div th:each="lesson, statusL:${section.lessons}"  class="lesson" th:id="'lesson'+${lesson.id}">
+					<div class="lesson-no">レッスン[[${statusL.count}]]</div>
+					<div class="lesson-title">[[${lesson.title}]]</div>
+					<button class="section-button">受講</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

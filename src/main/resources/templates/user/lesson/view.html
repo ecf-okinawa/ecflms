@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{user/layout :: layout(~{::head/content()},~{::body/content()})}">
+<head>
+	<title>講義編集</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/course.css}" />
+</head>
+<body>
+	<h1>[[${lesson.title}]]</h1>
+	<div th:utext="${lesson.content}">
+	</div>
+	<form th:action="@{/u/course/content/view/{courseId}(courseId=${courseId})}" method="get">
+	<div class="action">
+	    <input type="submit" value="戻る" />
+	</div>
+	</form>
+</body>
+</html>

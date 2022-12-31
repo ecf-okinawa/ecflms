@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.e3factory.common.repository.LessonRepository">
+	<select id="getLessonCount" resultType="int">
+		SELECT
+			max(id) as maxLessonId
+		FROM lessons
+	</select>
+	<select id="getLesson" resultType="com.e3factory.common.dto.Lesson">
+		SELECT
+			id,
+			title,
+			content
+		FROM lessons
+		where id = #{id}
+	</select>
+	<insert id="insert">
+		INSERT INTO lessons(id,title)
+		values(#{id},#{title});
+	</insert>
+	<insert id="update">
+		UPDATE lessons
+		SET title = #{title}, content = #{content}
+		WHERE id = #{id}
+	</insert>
+</mapper>

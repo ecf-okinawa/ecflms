@@ -25,6 +25,14 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	//Jackson
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.13.4'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.4'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-text
+	implementation 'org.apache.commons:commons-text:1.10.0'
+	// lombok
+	compileOnly 'org.projectlombok:lombok:1.18.24'
+
 }
 
 tasks.named('test') {

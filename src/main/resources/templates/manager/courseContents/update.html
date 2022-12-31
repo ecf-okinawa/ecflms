@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{manager/layout :: layout(~{::head/content()},~{::body/content()})}">
+<head>
+	<title>講座内容一覧</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/m/course.css}" />
+</head>
+<body>
+	<h2>[[${courseContent.name}]]</h2>
+	<ul id="message-area" class="message-area">
+	</ul>
+	<div id="sections" th:data-courseid="${courseContent.id}">
+		<div th:each="section, statusS :${courseContent.sections}" class="section" th:data-sectionid="${section.id}">
+			<div class="section-header">
+				<div class="section-no">セクション[[${statusS.count}]]</div>
+				<div class="section-title">[[${section.name}]]</div>
+				<button onclick="pushUpSection(this)">△</button>
+				<button onclick="pushDownSection(this)">▽</button>
+				<button onclick="deleteSection(this)">削除</button>
+			</div>
+			<div th:id="'lessons'+${section.id}">
+				<div th:each="lesson:${section.lessons}" class="lesson" th:data-sectionid="${section.id}" th:data-lessonid="${lesson.id}">
+					<div class="lesson-no">レッスン[[${lesson.order}]]</div>
+					<div class="lesson-title">[[${lesson.title}]]</div>
+					<button onclick="pushUp(this)">△</button>
+					<button onclick="pushDown(this)">▽</button>
+					<button onclick="deleteLesson(this)">削除</button>
+					<button th:onclick="'pushEdit('+${lesson.id}+')'">編集</button>
+				</div>
+			</div>
+			<div class="addLesson lesson">
+				<input type="text" id="newLessonName" />
+				<button onclick="addNewLesson(this)">レッスンを追加</button>
+			</div>
+		</div>
+	</div>
+	<div class="addSection section">
+		<input type="text" id="newSectionName" />
+		<button onclick="addNewSection()" >セクションを追加</button>
+	</div>
+	<button onclick="updateCourse()">更新</button>
+	<script th:src="@{/js/m/courseContents/update.js}"></script>
+</body>
+</html>
