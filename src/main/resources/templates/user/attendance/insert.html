@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{u/layout :: layout(~{::title},~{::body/content()})}">
+	th:replace="~{user/layout :: layout(~{::head/content()},~{::body/content()})}">
 <head>
     <title>講座削除</title>
 </head>
 <body>
     <h2>受講登録</h2>
     下記の講座を登録します。
-    <div th:object="${homeInfo}">
+    <div th:object="${course}">
 	    <table>
 	        <tr>
 	            <th>講座名</th>
@@ -17,24 +17,9 @@
 	            <th>講師名</th>
 	            <td th:text="*{teacherName}"></td>
 	        </tr>
-	        <tr>
-	            <th>開始日</th>
-	            <td th:text="*{startDate}"></td>
-	        </tr>
-	        <tr>
-	            <th>終了日</th>
-	            <td th:text="*{endDate}"></td>
-	        </tr>
-	        <tr>
-	            <th>定員</th>
-	            <td th:text="*{capacity}"></td>
-	        </tr>
-	        <tr>
-	            <th>場所</th>
-	            <td th:text="*{location}"></td>
-	        </tr>
 	    </table>
-		<form th:action="@{/u/doattend/{id}/{userid}(id=${homeInfo.id},userid=${#authentication.name})}" >
+		<form th:action="@{/u/attendance/doinsert}" >
+			<input type="hidden" name="courseId" th:value="*{id}" />
 			<div class="action">
 		        <input type="submit" value="登録" />
 		        <input type="submit" value="戻る" th:formaction="@{/u/home/{userid}(userid=${#authentication.name})}" th:formmethod="get" />

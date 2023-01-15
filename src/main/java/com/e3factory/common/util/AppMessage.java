@@ -1,5 +1,7 @@
 package com.e3factory.common.util;
 
+import java.util.Locale;
+
 import org.springframework.context.MessageSource;
 
 /**
@@ -24,10 +26,29 @@ public class AppMessage {
 		this.message = message;
 	}
 
-	public static AppMessage getMessage(MessageSource source, String id, Level level, String... param) {
-		String message = Utility.getMessage(source, id, param);
-		AppMessage appMessage = new AppMessage(id, level, message);
+	/**
+	 * メッセージオブジェクトを生成する。
+	 * @param source MessageSourceインスタンス
+	 * @param msgId messages.propertiesに定義済みのキー
+	 * @param level メッセージレベル
+	 * @param param プレースホルダーパラメータ
+	 * @return
+	 */
+	public static AppMessage getMessage(MessageSource source, String msgId, Level level, String... param) {
+		String message = getMessage(source, msgId, param);
+		AppMessage appMessage = new AppMessage(msgId, level, message);
 		return appMessage;
+	}
+
+	/**
+	 * メッセージを生成する。
+	 * @param source MessageSourceインスタンス
+	 * @param msgId messages.propertiesに定義済みのキー
+	 * @param params プレースホルダーパラメータ
+	 * @return
+	 */
+	public static String getMessage(MessageSource source, String msgId, String... params ) {
+		return source.getMessage(msgId, params, Locale.getDefault());
 	}
 
 	public String getId() {

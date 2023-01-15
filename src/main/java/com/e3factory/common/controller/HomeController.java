@@ -26,8 +26,6 @@ public class HomeController {
 		List<HomeInfo> list = homeService.getHomeInfo(userId, attended != null);
 		//セッション格納
 		model.addAttribute("homeInfoList",list);
-		//リダイレクト元からメッセージあればセット
-		model.addAttribute("messages", map.get("messages"));
 		//登録済み表示かそうでないか
 		if(attended != null) {
 			model.addAttribute("attended", attended != null);

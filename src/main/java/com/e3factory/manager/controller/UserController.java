@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.e3factory.common.dto.User;
 import com.e3factory.common.form.UserForm;
-import com.e3factory.common.util.Utility;
+import com.e3factory.common.util.AppMessage;
 import com.e3factory.manager.service.UserService;
 
 /**
@@ -128,7 +128,7 @@ public class UserController {
 		//更新処理
 		userService.doUserUpdate(form);
 		//結果メッセージの設定
-		String message = Utility.getMessage(messageSource,"i.user.002");
+		String message = AppMessage.getMessage(messageSource,"i.user.002");
 		//メッセージをリダイレクト先へ送るセッションに入れる
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
@@ -162,7 +162,7 @@ public class UserController {
 		//削除処理
 		userService.doUserDelete(user.getId());
 		//メッセージをリダイレクト先へ送るセッションに入れる
-		String message = Utility.getMessage(messageSource, "i.user.003");
+		String message = AppMessage.getMessage(messageSource, "i.user.003");
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
 		return "redirect:/m/user/view";

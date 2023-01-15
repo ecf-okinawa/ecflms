@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.e3factory.common.dto.Course;
-import com.e3factory.common.form.CourseForm;
 import com.e3factory.common.security.AuthEntity;
-import com.e3factory.common.util.Utility;
+import com.e3factory.common.util.AppMessage;
 import com.e3factory.manager.service.CourseService;
 
 @Controller
@@ -30,8 +29,8 @@ public class CourseController {
 	private MessageSource messageSource;
 
 	@ModelAttribute
-	public CourseForm createForm() {
-		return new CourseForm();
+	public Course createCourse() {
+		return new Course();
 	}
 
 	/**
@@ -98,7 +97,7 @@ public class CourseController {
 	public String courseUpdate(Model model, @PathVariable String id) {
 		//処理ロジック
 		Course course = courseService.courseUpdate(id);
-		model.addAttribute("courseForm", course);
+		model.addAttribute("course", course);
 		//ビュー指定
 		return "manager/course/update";
 	}
@@ -121,7 +120,7 @@ public class CourseController {
 		}
 		//処理ロジック
 		courseService.doCourseUpdate(course);
-		String message = Utility.getMessage(messageSource,"i.course.002");
+		String message = AppMessage.getMessage(messageSource,"i.course.002");
 		//メッセージをリダイレクト先へ送るセッションに入れる
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
@@ -155,7 +154,7 @@ public class CourseController {
 		//処理ロジック
 		courseService.doCourseDelete(course.getId());
 		//メッセージをリダイレクト先へ送るセッションに入れる
-		String message = Utility.getMessage(messageSource, "i.course.003");
+		String message = AppMessage.getMessage(messageSource, "i.course.003");
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
 		return "redirect:/m/course/view";

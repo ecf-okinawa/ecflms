@@ -3,14 +3,16 @@ package com.e3factory.common.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * コース情報DTO
  * @author ecf_pc
  *
  */
-@Data
+@Getter
+@Setter
 public class Course {
 	//コースID
 	private Integer id;

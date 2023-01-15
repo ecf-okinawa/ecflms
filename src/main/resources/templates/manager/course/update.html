@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h2>講座更新</h2>
-	<form th:action="@{/m/course/doupdate}" th:object="${courseForm}"
+	<form th:action="@{/m/course/doupdate}" th:object="${course}"
 		method="post">
 		<p th:errors="*{all}" class="validation_error"></p>
 		<div class="item">

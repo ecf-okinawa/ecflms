@@ -11,16 +11,16 @@
 		<a th:href="@{/u/home/{username}(username=${#authentication.name})}">すべての講座一覧</a>
 	</div>
 	<div class="cardBox">
-		<div th:each="message : ${messages}">
-			<p th:if="${message.level == T(com.e3factory.util.AppMessage.Level).INFO}" th:text="${message.message}" class="message"></p>
-			<p th:if="${message.level == T(com.e3factory.util.AppMessage.Level).WARN}" th:text="${message.message}" class="warn"></p>
+		<div th:if="${message != null}">
+			<p th:if="${message.level == T(com.e3factory.common.util.AppMessage.Level).INFO}" th:text="${message.message}" class="message"></p>
+			<p th:if="${message.level == T(com.e3factory.common.util.AppMessage.Level).WARN}" th:text="${message.message}" class="warn"></p>
 		</div>
 		<div class="courseCard" th:each="homeInfo : ${homeInfoList}">
 			<h4 th:if="${homeInfo.attendance}"><a th:href="@{/u/course/content/view/{courseId}(courseId=${homeInfo.courseId})}" th:text="${homeInfo.courseName}"></a></h4>
 			<h4 th:if="${!homeInfo.attendance}" th:text="${homeInfo.courseName}"></h4>
 			<p>講師名：<span th:text="${homeInfo.teacherName}"></span></p>
 			<img th:src="@{/img/{imgpath}(imgpath=${homeInfo.imgPath})}" />
-			<form th:action="@{/u/attend/{courseid}(courseid=${homeInfo.courseId})}" method="get"
+			<form th:action="@{/u/attendance/insert/{courseid}(courseid=${homeInfo.courseId})}" method="get"
 				sec:authorize="isAuthenticated()" th:if="${!homeInfo.attendance}" >
 				<input type="submit" value="登録" />
 			</form>
