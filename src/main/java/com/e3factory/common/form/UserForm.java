@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserForm extends User{
-	@NotEmpty
+	@NotEmpty(message="{valid.w01}")
 	private String passwordConfirm;
 }

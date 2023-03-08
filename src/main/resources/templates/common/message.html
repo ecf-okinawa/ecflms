@@ -1,0 +1,4 @@
+<div th:if="${message != null}">
+	<p th:if="${message.level == 'INFO'}" th:text="${message.message}" class="message"></p>
+	<p th:if="${message.level == 'WARN'}" th:text="${message.message}" class="warn"></p>
+</div>

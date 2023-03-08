@@ -10,21 +10,21 @@ import lombok.Setter;
 @Setter
 public class User {
 	//ユーザーID
-	@NotEmpty
-	@Size (min = 4, max = 20)
+	@NotEmpty(message="{valid.w01}")
+	@Size (min = 4, max = 20, message="{valid.w03}")
 	private String id;
 
 	//パスワード
-	@NotEmpty
-	@Size (min = 4, max = 20)
+	@NotEmpty(message="{valid.w01}")
+	@Size (min = 4, max = 20, message="{valid.w03}")
 	private String password;
 
 	//権限
-	@NotEmpty
+	@NotEmpty(message="{valid.w01}")
 	private String privilege;
 
 	//ユーザー名
-	@NotEmpty
-	@Size (min = 1, max = 20)
+	@NotEmpty(message="{valid.w01}")
+	@Size (min = 1, max = 20, message="{valid.w03}")
 	private String name;
 }

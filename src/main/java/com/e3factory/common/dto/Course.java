@@ -17,11 +17,12 @@ public class Course {
 	//コースID
 	private Integer id;
 	//コース名
-	@NotEmpty
-	@Size (min = 1, max = 50)
+	@NotEmpty(message="{valid.w01}")
+	@Size (min = 1, max = 50, message="{valid.w03}")
 	private String name;
 	//講師ユーザーID
-	@NotEmpty
+	@NotEmpty(message="{valid.w01}")
+	@Size (min = 1, max = 20, message="{valid.w03}")
 	private String userId;
 	//イメージ画像パス
 	private String imgPath;

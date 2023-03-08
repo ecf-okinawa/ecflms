@@ -44,6 +44,16 @@ public class UserService {
 	}
 
 	/**
+	 * ユーザー情報登録画面表示
+	 * @param model
+	 */
+	public void userInsert(Model model) {
+		UserForm form = new UserForm();
+		form.setPrivilege("ADMIN");
+		model.addAttribute("userForm", form);
+	}
+
+	/**
 	 * ユーザー登録実行処理
 	 * @param form
 	 */

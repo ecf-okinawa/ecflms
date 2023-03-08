@@ -1,10 +1,8 @@
 package com.e3factory.manager.controller;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.e3factory.common.dto.Course;
 import com.e3factory.common.security.AuthEntity;
-import com.e3factory.common.util.AppMessage;
+import com.e3factory.common.util.MessageUtil;
 import com.e3factory.manager.service.CourseService;
 
 @Controller
@@ -26,7 +24,7 @@ public class CourseController {
 	@Autowired
 	private CourseService courseService;
 	@Autowired
-	private MessageSource messageSource;
+	private MessageUtil msgUtil;
 
 	@ModelAttribute
 	public Course createCourse() {
@@ -80,7 +78,7 @@ public class CourseController {
 		}
 		//処理ロジック
 		courseService.doCourseInsert(course);
-		String message = messageSource.getMessage("i.course.001", new String[] {}, Locale.getDefault());
+		String message = msgUtil.getMessage("crud.i01", "講座");
 		//メッセージをリダイレクト先へ送るセッションに入れる
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
@@ -120,7 +118,7 @@ public class CourseController {
 		}
 		//処理ロジック
 		courseService.doCourseUpdate(course);
-		String message = AppMessage.getMessage(messageSource,"i.course.002");
+		String message = msgUtil.getMessage("crud.i02","講座");
 		//メッセージをリダイレクト先へ送るセッションに入れる
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
@@ -154,7 +152,7 @@ public class CourseController {
 		//処理ロジック
 		courseService.doCourseDelete(course.getId());
 		//メッセージをリダイレクト先へ送るセッションに入れる
-		String message = AppMessage.getMessage(messageSource, "i.course.003");
+		String message = msgUtil.getMessage("crud.i03","講座");
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
 		return "redirect:/m/course/view";

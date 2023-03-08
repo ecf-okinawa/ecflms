@@ -1,0 +1,38 @@
+.choices input[type="text"]{
+	width:400px;
+	height:2em;
+	margin:4px;
+}
+
+.choices textarea{
+	width:400px;
+	height:100px;
+	font-family: "";
+}
+
+.choices select{
+	width:406px;
+	height:2em;
+	margin:4px;
+}
+
+.btn{
+	margin-top:4px;
+	height:2em;
+}
+
+.insertTest{
+
+}
+
+.addQuiz{
+	padding:4px;
+	border:solid 2px #cccccc;
+	margin-bottom:4px;
+}
+
+.testTitle input{
+	width:400px;
+	height:2em;
+	margin:4px;
+}

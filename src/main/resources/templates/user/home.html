@@ -11,10 +11,7 @@
 		<a th:href="@{/u/home/{username}(username=${#authentication.name})}">すべての講座一覧</a>
 	</div>
 	<div class="cardBox">
-		<div th:if="${message != null}">
-			<p th:if="${message.level == T(com.e3factory.common.util.AppMessage.Level).INFO}" th:text="${message.message}" class="message"></p>
-			<p th:if="${message.level == T(com.e3factory.common.util.AppMessage.Level).WARN}" th:text="${message.message}" class="warn"></p>
-		</div>
+		<div th:replace="common/message"></div>
 		<div class="courseCard" th:each="homeInfo : ${homeInfoList}">
 			<h4 th:if="${homeInfo.attendance}"><a th:href="@{/u/course/content/view/{courseId}(courseId=${homeInfo.courseId})}" th:text="${homeInfo.courseName}"></a></h4>
 			<h4 th:if="${!homeInfo.attendance}" th:text="${homeInfo.courseName}"></h4>

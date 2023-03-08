@@ -1,7 +1,6 @@
 package com.e3factory.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.e3factory.common.dto.Attendance;
 import com.e3factory.common.security.AuthEntity;
 import com.e3factory.common.util.AppMessage;
+import com.e3factory.common.util.MessageUtil;
 import com.e3factory.user.service.AttendanceService;
 
 @Controller
@@ -21,7 +21,7 @@ public class AttendanceController {
 	@Autowired
 	private AttendanceService attendanceService;
 	@Autowired
-	private MessageSource messageSource;
+	private MessageUtil msgUtil;
 
 	//受講登録画面表示
 	@RequestMapping("/u/attendance/insert/{id}")
@@ -39,7 +39,7 @@ public class AttendanceController {
 		//受講登録を実行
 		attendanceService.doAttendanceInsert(model, attendance.getCourseId(), principal.getUsername());
 		//結果メッセージの設定
-		AppMessage message = AppMessage.getMessage(messageSource, "i.attendance.004", AppMessage.Level.INFO);
+		AppMessage message =  msgUtil.getAppMessage("atnd.i01", attendance.getCourseName());
 		//メッセージをリダイレクト先へ送るセッションに入れる
 		redirectAttributes.addFlashAttribute("message", message);
 		//画面遷移

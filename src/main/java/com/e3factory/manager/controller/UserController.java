@@ -1,9 +1,6 @@
 package com.e3factory.manager.controller;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.e3factory.common.dto.User;
 import com.e3factory.common.form.UserForm;
-import com.e3factory.common.util.AppMessage;
+import com.e3factory.common.util.MessageUtil;
 import com.e3factory.manager.service.UserService;
 
 /**
@@ -29,7 +26,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private MessageSource messageSource;
+	private MessageUtil msgUtil;
 
 	@ModelAttribute
 	public UserForm createForm() {
@@ -57,7 +54,8 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/m/user/insert")
-	public String userInsert() {
+	public String userInsert(Model model) {
+		userService.userInsert(model);
 		//ビュー表示のみ
 		return "manager/user/insert";
 	}
@@ -76,7 +74,7 @@ public class UserController {
 		//バリデーションチェック(Userに設定済)
 		//パスワード確認チェック
 		if( !form.getPassword().equals(form.getPasswordConfirm()) ) {
-			result.reject("errors.invalid.paswordConfirm");
+			result.reject("usrmng.w01");
 		}
 		if( result.hasErrors() ) {
 			//バリデーションエラー
@@ -85,7 +83,7 @@ public class UserController {
 		//登録処理
 		userService.doUserInsert(form);
 		//結果メッセージの設定
-		String message = messageSource.getMessage("i.user.001", new String[] {}, Locale.getDefault());
+		String message = msgUtil.getMessage("crud.i01","ユーザー");
 		//メッセージをリダイレクト先へ送るセッションに入れる
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
@@ -119,7 +117,7 @@ public class UserController {
 		//バリデーションチェック(UserFormに設定済)
 		//パスワード確認チェック
 		if( !form.getPassword().equals(form.getPasswordConfirm()) ) {
-			result.reject("errors.invalid.paswordConfirm");
+			result.reject("usrmng.w01");
 		}
 		if( result.hasErrors() ) {
 			//バリデーションエラー
@@ -128,7 +126,7 @@ public class UserController {
 		//更新処理
 		userService.doUserUpdate(form);
 		//結果メッセージの設定
-		String message = AppMessage.getMessage(messageSource,"i.user.002");
+		String message = msgUtil.getMessage("crud.i02","ユーザー");
 		//メッセージをリダイレクト先へ送るセッションに入れる
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
@@ -162,7 +160,7 @@ public class UserController {
 		//削除処理
 		userService.doUserDelete(user.getId());
 		//メッセージをリダイレクト先へ送るセッションに入れる
-		String message = AppMessage.getMessage(messageSource, "i.user.003");
+		String message = msgUtil.getMessage("crud.i03", "ユーザー");
 		redirectAttributes.addFlashAttribute("message", message);
 		//一覧へリダイレクト
 		return "redirect:/m/user/view";

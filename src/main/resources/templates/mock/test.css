@@ -1,0 +1,15 @@
+.quiz{
+	margin-left: 8px;
+}
+
+.quiz ol{
+	padding-left:8px;
+}
+.quiz li{
+	list-style:none;
+	padding-bottom:2px;
+	width:500px;
+}
+h1{
+	color:deepskyblue;
+}

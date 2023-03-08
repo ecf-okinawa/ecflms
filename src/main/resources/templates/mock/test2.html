@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Java基礎テスト 第1回</title>
+	<link rel="stylesheet" type="text/css" href="../../static/css/m/course.css" />
+	<link rel="stylesheet" type="text/css" href="test2.css" />
+</head>
+<body>
+	<h1>試験登録</h1>
+	<div class="testTitle">
+		試験名：</br>
+		<input type="text" value="Java 第1回確認テスト" />
+	</div>
+	<div class="quiz">
+		<h2>Q1</h2>
+			<form class="choices" >
+			解答形式：</br>
+			<select>
+				<option>択一式</option>
+				<option>複数選択式</option>
+				<option>穴埋め式</option>
+			</select></br>
+			得点：<input type="text" value="5"  style="width:60px" /></br>
+			問題:</br>
+			<textarea>クラスの定義について、正しいものを１つ選んでください。</textarea><br/>
+			選択肢:</br>
+			<input type="radio" /><input type="text" value="クラスは１つのプログラムに１つしか定義できない。"/><br/>
+			<input type="radio" /><input type="text" value="クラスはフィールドやメソッドを持つことができる"/><br/>
+			<input type="radio" /><input type="text" value="クラス名は大文字で定義しなければならない。"/><br/>
+			<input type="submit" value="選択肢を追加" class="btn"><br/><br/>
+			解説:</br>
+			<textarea>複数のクラスを作成し、メッセージのやり取りをすることでプログラムを実現します。</textarea><br/>
+			</form>
+		<div class="addQuiz">
+			<input type="submit" value="問題を追加" class="btn">
+		</div>
+		<div class="insertTest">
+			<input type="submit" value="試験を保存" class="btn">
+		</div>
+</body>
+</html>

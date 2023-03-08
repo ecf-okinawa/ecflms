@@ -24,6 +24,11 @@
 			</div>
 		</div>
 	</div>
+	<form method="get" th:action="@{/u/home/{userid}/attended(userid=${#authentication.name})}">
+		<div class="action">
+			<input type="submit" value="戻る"/>
+		</div>
+	</form>
 	<script th:src="@{/js/u/courseContents/view.js}"></script>
 </body>
 </html>

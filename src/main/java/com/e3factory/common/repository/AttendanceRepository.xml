@@ -57,7 +57,7 @@
 	</select>
 	<insert id="insert">
 		INSERT INTO attendances(id,user_id,course_id)
-		SELECT MAX(id)+1,#{userId},#{courseId} FROM attendances;
+		SELECT COALESCE(MAX(id),0)+1,#{userId},#{courseId} FROM attendances;
 	</insert>
 	<update id="updateEvaluate">
 		UPDATE attendances
